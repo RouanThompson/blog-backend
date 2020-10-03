@@ -16,6 +16,13 @@ class CommentsController < ApplicationController
         comment.destroy
     end
 
+    def update
+        blogs = Blog.all
+        comment = Comment.find(params[:id])
+        comment.update(comment_params)
+        render json: blogs
+    end
+
     private
 
     def comment_params
