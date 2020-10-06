@@ -11,6 +11,10 @@ class BlogsController < ApplicationController
         render json: blog 
     end
 
+    def destroy
+        blog = Blog.find(params[:id])
+        blog.destroy
+    end
 
     # I need more info on everything below
     private
