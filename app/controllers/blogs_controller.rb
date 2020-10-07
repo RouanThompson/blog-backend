@@ -16,6 +16,13 @@ class BlogsController < ApplicationController
         blog.destroy
     end
 
+    def update
+        blog = Blog.find(params[:id])
+        blog.update(blog_params)
+        blogs = Blog.all
+        render json: blogs
+    end
+
     # I need more info on everything below
     private
     
