@@ -1,7 +1,28 @@
 class UsersController < ApplicationController
 
-    def index
-        users = User.all
-        render json: users
+    def create
+        # user = User.create(
+        #     name: params[:name],
+        #     age: params[:age],
+        #     username: params[:username],
+        #     display_photo: params[:display_photo],
+        #     password: params[:password],
+        # )
+
+        user = User.create(user_params)
+
+        if user.valid?
+            render json: user, status: :created
+        else
+            render json: { message: user.errors.full_messages }, status: :bad_request
+        end
+    end
+
+
+    private
+
+    # when using require i get bad error 400, because require was looking for a user key which does not exist so error was raised
+    def user_params
+        params.permit(:name, :age, :username, :display_photo, :password)
     end
 end
