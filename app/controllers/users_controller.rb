@@ -12,8 +12,10 @@ class UsersController < ApplicationController
         user = User.create(user_params)
 
         if user.valid?
+            # renders user and successful creationg of user
             render json: user, status: :created
         else
+            # renders rails validation messages and not succesful request
             render json: { message: user.errors.full_messages }, status: :bad_request
         end
     end
